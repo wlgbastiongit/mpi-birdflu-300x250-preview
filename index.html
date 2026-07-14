@@ -101,7 +101,8 @@
      so opacity simply falls back to the base .el transition (1s, no delay) - a plain,
      always-reliable fade out in sync with the frame. */
 
-  /* frame 1: birds rise from beneath the frame; headline grows from nothing */
+  /* frame 1: birds rise from beneath the frame and land first; headline only
+     starts growing from nothing once the birds have fully settled into place */
   .frame.active .birds {
     opacity: 1;
     transition: opacity 1.1s ease-in-out;
@@ -109,8 +110,8 @@
   }
   .frame.active .headline {
     opacity: 1;
-    transition: opacity 0.75s ease-in-out 0.15s;
-    animation: expandIn 0.75s ease-out 0.15s;
+    transition: opacity 0.75s ease-in-out 1.25s;
+    animation: expandIn 0.75s ease-out 1.25s;
   }
 
   /* frames 2-4 text: no element-level animation - plain fade in/out via the frame's own opacity transition */
