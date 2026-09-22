@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="ad.size" content="width=300,height=250">
+<script src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
 <title>MPI Bird Flu Response - 300x250 (v2, Simple)</title>
 <style>
   html, body {
@@ -131,7 +132,7 @@
 
     <div class="frame" id="frame1">
       <img class="bg" src="images/bg-frame1.jpg" alt="">
-      <img class="el birds" src="images/birds.webp" alt="">
+      <img class="el birds" src="images/birds.png" alt="">
       <img class="el headline" src="images/el-frame1_headline.png" alt="Don't let bird flu take flight">
     </div>
 
@@ -166,16 +167,19 @@
   </div>
 
   <script>
-    // Adapted: Standard global platform variable. 
-    // Fallback landing page supplied if ad server doesn't override it.
-    var clickTag = "https://www.mpi.govt.nz/biosecurity-in-nz/dont-let-bird-flu-take-flight?utm_source=default&utm_medium=Display%20300x250&utm_campaign=Bird%2520Flu&utm_id=MPI001&utm_content=Detected"; 
+    // Standard ad-server clickTag convention. CM360 assigns the destination URL at trafficking time.
+    var clickTag = "";
 
-    // Adapted: Ad server script compatibility for case sensitivity protection
     var clickThroughTarget = document.getElementById("clickthrough");
     if (clickThroughTarget) {
         clickThroughTarget.addEventListener("click", function (e) {
           e.preventDefault();
-          window.open(window.clickTag || clickTag, "_blank");
+          var exitUrl = window.clickTag || clickTag;
+          if (typeof Enabler !== "undefined" && Enabler.isInitialized && Enabler.isInitialized()) {
+            Enabler.exit("Exit", exitUrl);
+          } else {
+            window.open(exitUrl, "_blank");
+          }
         });
     }
 
